@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Page</title>
+    <title>Buggz Radio</title>
+    <link rel="icon" type="png" href="/assets/black background.png">
     <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Include the header -->
-    <div id="header">
+    <header id="header">
         <script>
             fetch('header.html').then(response => response.text()).then(data => {
                 document.getElementById('header').innerHTML = data;
             });
-        </script> -->
+        </script>
+    </header>
+
+    
+    
+    <div id="head">
+        Head Content
     </div>
 
-    <div id="content">
-        <h1>Welcome to the Sample Page</h1>
-        <p>This is a sample page that includes external HTML for the header and footer, and references a CSS file for styling.</p>
-    </div>
 
     <!-- Include the footer -->
-    <div id="footer">
+    <footer id="footer">
         <script>
             fetch('footer.html').then(response => response.text()).then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
-        </script> -->
-    </div>
+        </script>
+    </footer>
 </body>
 </html>

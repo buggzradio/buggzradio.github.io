@@ -1,9 +1,55 @@
 body {
+    align-content: center;
+    text-align: center;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #000000;
     color: #ffffff;
+}
+
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    background-image: linear-gradient(black, white, black);
+    border: none;
+    color: #323232;
+    text-align: center;
+    font-size: 28px;
+    padding: 10px;
+    width: auto;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+#head {
+    text-align: center;
 }
 
 #content {
