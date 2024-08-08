@@ -1,17 +1,111 @@
+<!-- Header HTML with embedded CSS -->
+<style>
+    /* Mobile styles */
+    @media (max-width: 768px) {
+        #header {
+            padding-bottom: 15px;
+        }
+
+        header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #navbuttons {
+            display: none; /* Hide the navigation by default */
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        #navbuttons.show {
+            display: flex; /* Show the navigation when 'show' class is added */
+        }
+
+        #dropdown-toggle {
+            display: block; /* Show the toggle button */
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            margin-bottom: 10px; /* Add some margin for spacing */
+        }
+
+        #right-section {
+            text-align: left;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        #left-section img {
+            margin-bottom: 10px;
+        }
+
+        #navbuttons .button {
+            margin: 5px 0;
+            width: 100%;
+            text-align: left;
+            background: none; /* Remove default button background */
+            border: none; /* Remove default button border */
+            font-size: 16px; /* Adjust font size if needed */
+            color: white; /* Ensure button text is visible */
+            padding: 10px; /* Add padding for better click area */
+            cursor: pointer; /* Ensure the cursor is a pointer */
+        }
+    }
+
+    /* Default styles for desktop */
+    @media (min-width: 769px) {
+        #dropdown-toggle {
+            display: none; /* Hide the toggle button on desktop */
+        }
+
+        #navbuttons {
+            display: flex; /* Show buttons on desktop */
+            flex-direction: row;
+            align-items: center;
+        }
+
+        #navbuttons .button {
+            margin: 0 15px; /* Adjust spacing for desktop */
+            background: none; /* Remove default button background */
+            border: none; /* Remove default button border */
+            font-size: 16px; /* Adjust font size if needed */
+            color: white; /* Ensure button text is visible */
+            padding: 10px; /* Add padding for better click area */
+            cursor: pointer; /* Ensure the cursor is a pointer */
+        }
+    }
+</style>
+
+<!-- Header content -->
 <div id="header" style="padding-bottom: 25px;">
     <header style="padding: 10px; display: flex; justify-content: space-between; align-items: center;">
         <div id="left-section" style="display: flex; align-items: center;">
             <a href="/"><img src="/assets/black background.png" alt="Logo" style="height: 100px; margin-left: 15px; margin-right: 15px;"></a>
+            <!-- Dropdown Toggle for Mobile -->
+            <button id="dropdown-toggle">☰ Menu</button>
             <nav>
-                <div id="navbuttons" style="display: flex; align-items: center;">
-                    <button class="button" href="/" style="vertical-align: middle; margin-right: 15px;"><span>Home</span></button>
-                    <button class="button" href="/about" style="vertical-align: middle; margin-right: 15px;"><span>About</span></button>
-                    <button class="button" href="/contact" style="vertical-align: middle;"><span>Contact</span></button>
+                <div id="navbuttons">
+                    <a href="/"><button class="button"><span>Home</span></button></a>
+                    <a href="/pages/about.html"><button class="button"><span>About</span></button></a>
                 </div>
             </nav>
         </div>
         <div id="right-section" style="text-align: right;">
-            <p>Email: <a style="color:white" href="mailto:buggzradio@gmail.com" target="_blank">buggzradio@gmail.com</a>
+            <p>Email: <a style="color:white" href="mailto:buggzradio@gmail.com" target="_blank">buggzradio@gmail.com</a></p>
         </div>
     </header>
 </div>
+
+<!-- JavaScript for menu toggle -->
+<script>
+    document.getElementById('dropdown-toggle').addEventListener('click', function() {
+        var navButtons = document.getElementById('navbuttons');
+        navButtons.classList.toggle('show');
+    });
+</script>
