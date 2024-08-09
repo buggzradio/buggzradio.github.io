@@ -141,3 +141,36 @@ body {
   opacity: 1;
   right: 0;
 }
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333; /* Match the background color */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 0;
+  margin-top: 5px; /* Adjust for spacing */
+  color: white; /* Ensure text is visible */
+}
+
+/* Dropdown links styled as buttons */
+.dropdown-content a {
+  display: block;
+  color: white; /* Ensure text color is visible */
+  padding: 10px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Show the dropdown content when active */
+.dropdown-content.show {
+  display: block;
+}
