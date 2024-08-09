@@ -1,0 +1,28 @@
+/* Mobile styles */
+@media (max-width: 768px) {
+    #header {
+        padding-bottom: 15px;
+    }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #left-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #navbuttons {
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #navbuttons .button {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    #right-section {
+        text-align: left;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
