@@ -188,3 +188,48 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding-top: 15px ;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+li {
+  background-color: #9c0000;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+li:hover {
+  background-color: #ce0707;
+}
+
+a {
+  display: block;
+  padding: 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
