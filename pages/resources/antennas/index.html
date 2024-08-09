@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antennas - Buggz</title>
+    <link rel="icon" type="png" href="/assets/black background.png">
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            #header {
+                padding-bottom: 15px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            #left-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            #navbuttons {
+                margin-top: 10px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            #navbuttons .button {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            #right-section {
+                text-align: left;
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include the header -->
+    <header id="header">
+        <script>
+            fetch('/header.html').then(response => response.text()).then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+        </script>
+    </header>
+    <div class="container">
+        <img src="/assets/beam with sunset.jpg" style="width:100%; opacity: 60%;" alt="Waterfall chart with Buggz Radio logo">
+        <div class="centered">
+            <h1 style="font-size: 64px;">Antennas - Buggz Radio</h1>
+            <p style="">Welcome to the Antennas section of Buggz Radio! Antennas are the heart of any effective ham radio setup, and here at Buggz Radio, we've gathered all the essential information to help you make the best choices. Whether you're interested in building your own antennas, selecting the best models to buy, or understanding the science behind each design, this is your go-to resource. Explore our comprehensive guides, expert tips, and curated links to trusted resources that will help you boost your signal, expand your range, and enhance your overall ham radio experience.</p>
+
+        </div>
+    </div>
+    <div id="content">
+
+    </div>
+
+    <!-- Include the footer -->
+    <footer id="footer">
+        <script>
+            fetch('/footer.html').then(response => response.text()).then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+        </script>
+    </footer>
+</body>
+</html>
