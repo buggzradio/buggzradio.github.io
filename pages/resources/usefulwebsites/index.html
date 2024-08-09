@@ -41,6 +41,25 @@
                 width: 100%;
             }
         }
+
+        /* Button styling for links */
+        .button-link {
+            display: block;
+            margin-bottom: 10px;
+            background-color: #850000; /* Green */
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button-link:hover {
+            background-color: #cf0000; /* Darker green */
+        }
     </style>
 </head>
 <body>
@@ -55,16 +74,18 @@
 <div style="color:white;">
     <h1 style="color: white;">Useful Websites for Ham Radio Operators</h1>
     <ul>
-        <li><a href="https://www.qrz.com/" target="_blank">QRZ.com</a> - A popular resource for looking up call signs, logging contacts, and engaging with the ham radio community.</li>
-        <li><a href="https://www.eham.net/" target="_blank">eHam.net</a> - A comprehensive site with articles, product reviews, forums, and resources for amateur radio operators.</li>
-        <li><a href="https://www.arrl.org/" target="_blank">ARRL (American Radio Relay League)</a> - The national association for amateur radio, offering licensing resources, news, and event information.</li>
-        <li><a href="https://www.hamradioweb.org/" target="_blank">Ham Radio Web</a> - An online community and forum for ham radio enthusiasts.</li>
-        <li><a href="https://www.radioreference.com/" target="_blank">Radio Reference</a> - A comprehensive database for radio communications information, including frequency data and scanner resources.</li>
-        <li><a href="https://www.dxzone.com/" target="_blank">DXZone</a> - A vast directory of amateur radio-related links, covering a wide range of topics and resources.</li>
-        <li><a href="https://www.hamqsl.com/" target="_blank">HamQSL</a> - Provides tools for amateur radio operators, including propagation forecasts, solar data, and more.</li>
-        <li><a href="https://www.hamradioreviews.eu/" target="_blank">Ham Radio Reviews</a> - Offers reviews and articles on ham radio equipment and accessories.</li>
-        <li><a href="https://www.hamuniverse.com/" target="_blank">Ham Universe</a> - A resource for ham radio projects, articles, and educational content.</li>
-        <li><a href="https://www.qrzcq.com/" target="_blank">QRZCQ</a> - Another resource for ham radio call sign lookups and logging contacts, with a social network feel.</li>
+        <li><a class="button-link" href="https://www.qrz.com/" target="_blank">QRZ.com - A popular resource for looking up call signs, logging contacts, and engaging with the ham radio community.</a></li>
+        <li><a class="button-link" href="https://www.eham.net/" target="_blank">eHam.net - A comprehensive site with articles, product reviews, forums, and resources for amateur radio operators.</a></li>
+        <li><a class="button-link" href="https://www.arrl.org/" target="_blank">ARRL (American Radio Relay League) - The national association for amateur radio, offering licensing resources, news, and event information.</a></li>
+        <li><a class="button-link" href="https://www.hamradioweb.org/" target="_blank">Ham Radio Web - An online community and forum for ham radio enthusiasts.</a></li>
+        <li><a class="button-link" href="https://www.radioreference.com/" target="_blank">Radio Reference - A comprehensive database for radio communications information, including frequency data and scanner resources.</a></li>
+        <li><a class="button-link" href="https://www.dxzone.com/" target="_blank">DXZone - A vast directory of amateur radio-related links, covering a wide range of topics and resources.</a></li>
+        <li><a class="button-link" href="https://www.hamqsl.com/" target="_blank">HamQSL - Provides tools for amateur radio operators, including propagation forecasts, solar data, and more.</a></li>
+        <li><a class="button-link" href="https://www.hamradioreviews.eu/" target="_blank">Ham Radio Reviews - Offers reviews and articles on ham radio equipment and accessories.</a></li>
+        <li><a class="button-link" href="https://www.hamuniverse.com/" target="_blank">Ham Universe - A resource for ham radio projects, articles, and educational content.</a></li>
+        <li><a class="button-link" href="https://www.qrzcq.com/" target="_blank">QRZCQ - Another resource for ham radio call sign lookups and logging contacts, with a social network feel.</a></li>
+        <li><a class="button-link" href="https://repeaterbook.com" target="_blank">RepeaterBook - A sweet directory of repeaters and nodes that can be quieried and exported.</a></li>
+
     </ul>
 </div>
     <!-- Include the footer -->
