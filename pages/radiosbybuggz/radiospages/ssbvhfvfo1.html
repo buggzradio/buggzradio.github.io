@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radios - Buggz</title>
+    <link rel="icon" type="image/png" href="/assets/black background.png">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header id="header">
+        <script>
+            fetch('/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </header>
+
+    <h1 style="font-size: 64px;">SSB VHF VFO Radio</h1>
+
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="/assets/VHFVFO1/vfo-breakout.jpg" style="width:300px;">
+            <div class="text">VFO Breakout</div>
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="/assets/VHFVFO1/IMG_0359.HEIC.jpeg" style="width:300px;">
+            <div class="text">Screen</div>
+        </div>
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="/assets/VHFVFO1/ptt-test.jpg" style="width:300px">
+            <div class="text">PTT Test</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <h2>Product Overview</h2>
+    <p>Experience the power and versatility of our fully assembled VHF radio, designed specifically for the 6M and 2M amateur radio bands. This compact and portable radio is perfect for both seasoned operators and newcomers looking for reliable performance in a user-friendly package.</p>
+
+    <h2>Key Features</h2>
+    <ul>
+        <li><strong>Dual-Band Operation:</strong> Seamlessly switch between the 6M and 2M bands, offering wide coverage and flexibility for various communication needs.</li>
+        <li><strong>Clear, Crisp Audio:</strong> High-quality components ensure clear transmission and reception, making it ideal for both local and long-distance communication.</li>
+        <li><strong>User-Friendly Interface:</strong> Navigate frequencies, modes, and settings with ease using the intuitive control panel, featuring a bright, easy-to-read LCD display.</li>
+        <li><strong>Durable Design:</strong> Built to withstand the rigors of both indoor and outdoor use, this radio is perfect for field operations, emergency communication, or everyday use.</li>
+        <li><strong>Compact & Portable:</strong> Lightweight and compact, this radio is easy to carry, making it an excellent choice for on-the-go communication.</li>
+    </ul>
+
+    <h2>Technical Specifications</h2>
+    <ul>
+        <li><strong>Frequency Range:</strong> Covers the 6M (50-54 MHz) and 2M (144-148 MHz) bands.</li>
+        <li><strong>Output Power:</strong> Up to 25W adjustable output, providing ample power for clear communication.</li>
+        <li><strong>Modulation Modes:</strong> Supports AM, FM, USB, and LSB for versatile operation across different transmission modes.</li>
+        <li><strong>Display:</strong> High-resolution LCD with backlighting for easy visibility in any lighting condition.</li>
+        <li><strong>Battery Life:</strong> Long-lasting rechargeable battery with up to 12 hours of operation on a single charge.</li>
+        <li><strong>Connectivity:</strong> Includes standard antenna connectors and an audio jack for external speakers or headsets.</li>
+    </ul>
+
+    <footer id="footer">
+        <script>
+            fetch('/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                });
+        </script>
+    </footer>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+    </script>
+</body>
+</html>
