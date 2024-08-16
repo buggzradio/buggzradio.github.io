@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ham Radio Spot Cluster</title>
+    <title>KOTA Spot Cluster</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
     <link rel="icon" href="KOTA_LOGO.png" image/png"> <!-- Favicon link -->
+    <link rel="stylesheet" href="/css/styles.css">
     <style>
-        body {
-            background-color :black;
-            color: white;
-        }
         #map {
             height: 500px;
             width: 100%;
@@ -38,6 +35,14 @@
     </style>
 </head>
 <body>
+        <!-- Include the header -->
+        <header id="header">
+            <script>
+                fetch('/header.html').then(response => response.text()).then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+            </script>
+        </header>
     <div>
         <h1>KidsOnTheAir Spots Cluster</h1>
     </div>
@@ -52,20 +57,20 @@
         <input type="text" id="frequency" name="frequency" required>
         <label for="duration">Duration (hours):</label>
         <input type="number" id="duration" name="duration" min="1" required>
-        <button type="submit">Submit Waypoint</button>
+        <button class="button2" type="submit">Submit My Spot</button>
     </form>
     <div id="map"></div>
 
     <div id="legend">
         <h3>Frequency Bands</h3>
-        <div><span class="color-box" style="background-color: blue;"></span> 160m</div>
-        <div><span class="color-box" style="background-color: green;"></span> 80m</div>
-        <div><span class="color-box" style="background-color: orange;"></span> 40m</div>
-        <div><span class="color-box" style="background-color: red;"></span> 20m</div>
-        <div><span class="color-box" style="background-color: purple;"></span> 15m</div>
-        <div><span class="color-box" style="background-color: yellow;"></span> 10m</div>
-        <div><span class="color-box" style="background-color: violet;"></span> 2m</div>
-        <div><span class="color-box" style="background-color: gray;"></span> Other</div>
+        <div><span class="color-box" style="background-color: blue;"></span>160m</div>
+        <div><span class="color-box" style="background-color: green;"></span>80m</div>
+        <div><span class="color-box" style="background-color: orange;"></span>40m</div>
+        <div><span class="color-box" style="background-color: red;"></span>20m</div>
+        <div><span class="color-box" style="background-color: purple;"></span>15m</div>
+        <div><span class="color-box" style="background-color: yellow;"></span>10m</div>
+        <div><span class="color-box" style="background-color: violet;"></span>2m</div>
+        <div><span class="color-box" style="background-color: gray;"></span>Other</div>
     </div>
 
   
@@ -185,5 +190,13 @@
         }
     </script>
     <iframe src="https://gps-coordinates.org" style="border:0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="100%" allowfullscreen></iframe>
+    <footer id="footer">
+        <script>
+            fetch('/footer.html').then(response => response.text()).then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+        </script>
+    </footer>
+
 </body>
 </html>
