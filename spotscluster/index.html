@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ham Radio Spot Cluster</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <link rel="icon" href="KOTA_LOGO.png" image/png"> <!-- Favicon link -->
+    <style>
+        body {
+            background-color :black;
+            color: white;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        #legend {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        #calculator {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .color-box {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>KidsOnTheAir Spots Cluster</h1>
+    </div>
+    <form id="waypointForm">
+        <label for="callsign">Callsign:</label>
+        <input type="text" id="callsign" name="callsign" required>
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" required>
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" required>
+        <label for="frequency">Frequency (MHz):</label>
+        <input type="text" id="frequency" name="frequency" required>
+        <label for="duration">Duration (hours):</label>
+        <input type="number" id="duration" name="duration" min="1" required>
+        <button type="submit">Submit Waypoint</button>
+    </form>
+    <div id="map"></div>
+
+    <div id="legend">
+        <h3>Frequency Bands</h3>
+        <div><span class="color-box" style="background-color: blue;"></span> 160m</div>
+        <div><span class="color-box" style="background-color: green;"></span> 80m</div>
+        <div><span class="color-box" style="background-color: orange;"></span> 40m</div>
+        <div><span class="color-box" style="background-color: red;"></span> 20m</div>
+        <div><span class="color-box" style="background-color: purple;"></span> 15m</div>
+        <div><span class="color-box" style="background-color: yellow;"></span> 10m</div>
+        <div><span class="color-box" style="background-color: violet;"></span> 2m</div>
+        <div><span class="color-box" style="background-color: gray;"></span> Other</div>
+    </div>
+
+  
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtKni6lOzDYJ5Id5LL1GpneO43YQ_2IiQ",
+            authDomain: "kidsontheair---spots-cluster.firebaseapp.com",
+            projectId: "kidsontheair---spots-cluster",
+            storageBucket: "kidsontheair---spots-cluster.appspot.com",
+            messagingSenderId: "834751733453",
+            appId: "1:834751733453:web:322f67cd41f6bcec13d384",
+            measurementId: "G-GK39EBSWTH"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Initialize Leaflet map
+        var map = L.map('map').setView([0, 0], 2); // Center map globally
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        function getBandAndColor(frequency) {
+            if (frequency >= 1.8 && frequency <= 2.0) {
+                return { band: '160m', color: 'blue' };
+            } else if (frequency > 3.5 && frequency <= 4.0) {
+                return { band: '80m', color: 'green' };
+            } else if (frequency > 7.0 && frequency <= 7.3) {
+                return { band: '40m', color: 'orange' };
+            } else if (frequency > 14.0 && frequency <= 14.35) {
+                return { band: '20m', color: 'red' };
+            } else if (frequency > 21.0 && frequency <= 21.45) {
+                return { band: '15m', color: 'purple' };
+            } else if (frequency > 28.0 && frequency <= 29.7) {
+                return { band: '10m', color: 'yellow' };
+            } else if (frequency > 143 && frequency <= 162) {
+                return { band: '2m', color: 'violet' };
+            } else {
+                return { band: 'Other', color: 'gray' };
+            }
+        }
+
+        document.getElementById('waypointForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var callsign = document.getElementById('callsign').value;
+            var latitude = parseFloat(document.getElementById('latitude').value);
+            var longitude = parseFloat(document.getElementById('longitude').value);
+            var frequency = parseFloat(document.getElementById('frequency').value);
+            var duration = parseFloat(document.getElementById('duration').value);
+            var bandColor = getBandAndColor(frequency);
+
+            // Calculate expiration time based on duration
+            var expiration = new Date();
+            expiration.setHours(expiration.getHours() + duration);
+
+            db.collection("waypoints").add({
+                callsign: callsign,
+                latitude: latitude,
+                longitude: longitude,
+                frequency: frequency,
+                frequency_band: bandColor.band,
+                color: bandColor.color,
+                timestamp: new Date(),
+                expiration: expiration // Store expiration timestamp
+            }).then(() => {
+                console.log("Waypoint added to Firestore");
+                loadWaypoints(); // Reload waypoints after adding
+            }).catch((error) => {
+                console.error("Error adding waypoint: ", error);
+            });
+        });
+
+        function loadWaypoints() {
+            db.collection("waypoints").where("expiration", ">", new Date()).get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var data = doc.data();
+                    var marker = L.circleMarker([data.latitude, data.longitude], {
+                        color: data.color,
+                        radius: 8
+                    }).addTo(map);
+
+                    marker.bindPopup(`<b>Callsign:</b> ${data.callsign}<br><b>Frequency:</b> ${data.frequency} MHz<br><b>Band:</b> ${data.frequency_band}`);
+                });
+            });
+        }
+
+        function removeExpiredWaypoints() {
+            db.collection("waypoints").where("expiration", "<=", new Date()).get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var id = doc.id;
+                    db.collection("waypoints").doc(id).delete().then(() => {
+                        console.log("Expired waypoint removed from Firestore");
+                    }).catch((error) => {
+                        console.error("Error removing expired waypoint: ", error);
+                    });
+                });
+            });
+        }
+
+        loadWaypoints(); // Load waypoints on page load
+
+        // Periodically remove expired waypoints (every 10 minutes)
+        setInterval(removeExpiredWaypoints, 10 * 60 * 1000);
+
+        // Latitude/Longitude Calculator
+        function calculate() {
+            var lat = parseFloat(document.getElementById('lat').value);
+            var lng = parseFloat(document.getElementById('lng').value);
+            var result = `Latitude: ${lat}, Longitude: ${lng}`;
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+    <iframe src="https://gps-coordinates.org" style="border:0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="400px" width="100%" allowfullscreen></iframe>
+</body>
+</html>
