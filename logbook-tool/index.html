@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ham Radio Contact Logger</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .contact-list {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .export-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .export-btn:hover {
+            background-color: #45a049;
+        }
+        .config-btn {
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .config-btn:hover {
+            background-color: #1976D2;
+        }
+        #config-page {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ham Radio Contact Logger</h1>
+    
+    <button class="config-btn" onclick="toggleConfigPage()">Configuration</button>
+
+    <div id="config-page">
+        <h2>Station Configuration</h2>
+        <form id="config-form">
+            <label for="callsign">Your Callsign:</label>
+            <input type="text" id="configCallsign" name="configCallsign" required>
+            <br><br>
+
+            <button type="button" onclick="fetchConfig()">Fetch Configuration</button>
+        </form>
+    </div>
+
+    <div id="map"></div>
+    
+    <form id="contact-form">
+        <label for="callsign">Callsign:</label>
+        <input type="text" id="callsign" name="callsign" required>
+        <br><br>
+
+        <label for="frequency">Frequency:</label>
+        <input type="text" id="frequency" name="frequency">
+        <br><br>
+
+        <label for="mode">Mode:</label>
+        <input type="text" id="mode" name="mode">
+        <br><br>
+
+        <label for="timeCST">Time (CST):</label>
+        <input type="datetime-local" id="timeCST" name="timeCST" required>
+        <br><br>
+
+        <label for="timeUTC">Time (UTC):</label>
+        <input type="datetime-local" id="timeUTC" name="timeUTC" required>
+        <br><br>
+
+        <label for="operatorName">Operator Name:</label>
+        <input type="text" id="operatorName" name="operatorName" readonly>
+        <br><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" readonly>
+        <br><br>
+
+        <button type="submit">Add Contact</button>
+    </form>
+
+    <div class="contact-list">
+        <h2>Contact List</h2>
+        <table id="contacts-table">
+            <thead>
+                <tr>
+                    <th>Callsign</th>
+                    <th>Frequency</th>
+                    <th>Mode</th>
+                    <th>Time (CST)</th>
+                    <th>Time (UTC)</th>
+                    <th>Operator Name</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody id="contacts-body">
+                <!-- Contacts will be added here dynamically -->
+            </tbody>
+        </table>
+        <button class="export-btn" onclick="exportToADIF()">Export to ADIF</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
